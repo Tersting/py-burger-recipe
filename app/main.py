@@ -9,7 +9,7 @@ class Validator(ABC):
     def __get__(self, instance: None | BurgerRecipe, owner: type) -> int | str:
         if instance is None:
             return self
-        return getattr(instance, self.protected_name)
+        return instance.__dict__.get(self.protected_name)
 
     def __set__(self, instance: BurgerRecipe, value: int | str) -> None:
         self.validate(value)
